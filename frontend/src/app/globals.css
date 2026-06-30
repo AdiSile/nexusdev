@@ -1,0 +1,682 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   FONT IMPORTS (self-hosted via next/font în layout.tsx)
+   Fonturile sunt încărcate asincron prin next/font cu
+   display:swap. Variabilele CSS --font-playfair,
+   --font-poppins, --font-jetbrains sunt injectate automat
+   și folosite mai jos pentru font-family.
+   ============================================================ */
+
+/* ============================================================
+   FONT AWESOME (icon library)
+   ============================================================ */
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
+/* ============================================================
+   CSS CUSTOM PROPERTIES (THEME)
+   Fundal închis implicit. Variabilele acoperă:
+   - paleta de culori
+   - blur / glass
+   - spacing / radius
+   - shadows
+   - tranziții
+   ============================================================ */
+:root {
+  /* --- Background & Foreground --- */
+  --background: #0a0a0f;
+  --background-soft: #12121a;
+  --background-elevated: #1a1a25;
+  --foreground: #f0f0f5;
+  --foreground-muted: #9e9eb0;
+  --foreground-dim: #5e5e70;
+
+  /* --- Brand: Purple --- */
+  --purple-50: #faf5ff;
+  --purple-100: #f3e8ff;
+  --purple-200: #e9d5ff;
+  --purple-300: #d8b4fe;
+  --purple-400: #c084fc;
+  --purple-500: #a855f7;
+  --purple-600: #9333ea;
+  --purple-700: #7e22ce;
+  --purple-800: #6b21a8;
+  --purple-900: #581c87;
+  --purple-950: #3b0764;
+
+  /* --- Brand: Gold --- */
+  --gold-50: #fffbeb;
+  --gold-100: #fef3c7;
+  --gold-200: #fde68a;
+  --gold-300: #fcd34d;
+  --gold-400: #fbbf24;
+  --gold-500: #f59e0b;
+  --gold-600: #d97706;
+  --gold-700: #b45309;
+  --gold-800: #92400e;
+  --gold-900: #78350f;
+  --gold-950: #451a03;
+
+  /* --- Primary & Accent shortcuts --- */
+  --primary: var(--purple-700);
+  --primary-light: var(--purple-500);
+  --primary-dark: var(--purple-800);
+  --accent: var(--gold-500);
+  --accent-light: var(--gold-400);
+  --accent-dark: var(--gold-600);
+
+  /* --- Glassmorphism --- */
+  --glass-bg: rgba(18, 18, 26, 0.55);
+  --glass-bg-light: rgba(255, 255, 255, 0.06);
+  --glass-bg-strong: rgba(18, 18, 26, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-hover: rgba(255, 255, 255, 0.14);
+  --glass-blur: 12px;
+  --glass-blur-lg: 20px;
+  --glass-blur-xl: 28px;
+  --glass-radius: 16px;
+  --glass-radius-sm: 10px;
+  --glass-radius-lg: 24px;
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  --glass-shadow-lg: 0 16px 64px rgba(0, 0, 0, 0.45);
+  --glass-shadow-purple: 0 8px 40px rgba(126, 34, 206, 0.18);
+  --glass-shadow-gold: 0 8px 40px rgba(245, 158, 11, 0.18);
+
+  /* --- Surfaces & Borders --- */
+  --surface: #1a1a25;
+  --surface-hover: #22222f;
+  --surface-elevated: #252535;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
+
+  /* --- Radius --- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-full: 9999px;
+
+  /* --- Shadows --- */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 16px 64px rgba(0, 0, 0, 0.55);
+  --shadow-purple: 0 0 20px rgba(126, 34, 206, 0.25);
+  --shadow-gold: 0 0 20px rgba(245, 158, 11, 0.25);
+
+  /* --- Transitions --- */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* --- Z-Index Scale --- */
+  --z-base: 0;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-popover: 500;
+  --z-tooltip: 600;
+  --z-toast: 700;
+}
+
+/* ============================================================
+   LIGHT THEME OVERRIDE
+   (păstrat pentru comutare viitoare; implicit e dark)
+   ============================================================ */
+[data-theme='light'] {
+  --background: #f8f7fc;
+  --background-soft: #f0eef8;
+  --background-elevated: #e8e5f4;
+  --foreground: #1a1025;
+  --foreground-muted: #5e5070;
+  --foreground-dim: #9080a0;
+
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-bg-light: rgba(255, 255, 255, 0.35);
+  --glass-bg-strong: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-border-hover: rgba(0, 0, 0, 0.14);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --glass-shadow-lg: 0 16px 64px rgba(0, 0, 0, 0.12);
+
+  --surface: #ffffff;
+  --surface-hover: #f5f3fa;
+  --surface-elevated: #eeebf7;
+  --border: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.14);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 16px 64px rgba(0, 0, 0, 0.12);
+}
+
+/* ============================================================
+   SCROLLBAR CUSTOM (Webkit)
+   Subțire, stilizat pe temă purpuriu-închis.
+   ============================================================ */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--purple-800) transparent;
+}
+
+/* Chrome / Edge / Safari */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--purple-800);
+  border-radius: 3px;
+  transition: background var(--transition-fast);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--purple-600);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: var(--purple-500);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* ============================================================
+   BASE ELEMENT RESETS
+   ============================================================ */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Selection color */
+::selection {
+  background: var(--purple-600);
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background: var(--purple-600);
+  color: #ffffff;
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--purple-500);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Links */
+a {
+  color: var(--purple-400);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--purple-300);
+}
+
+/* ============================================================
+   TYPOGRAPHY UTILITIES
+   ============================================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair), 'Playfair Display', serif;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--foreground);
+}
+
+h1 { font-size: 2.5rem; letter-spacing: -0.02em; }
+h2 { font-size: 2rem; letter-spacing: -0.01em; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.1rem; }
+h6 { font-size: 1rem; }
+
+code, pre, kbd, samp {
+  font-family: var(--font-jetbrains), 'JetBrains Mono', monospace;
+}
+
+/* ============================================================
+   GLASSMORPHISM UTILITY LAYER
+   Clase de sticlă compuse: bg, border, blur, shadow.
+   Variante: base, dark, purple, gold, white, strong.
+   ============================================================ */
+@layer components {
+  /* --- Glass base --- */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--glass-radius);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .glass-sm {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--glass-radius-sm);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .glass-lg {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur-lg));
+    -webkit-backdrop-filter: blur(var(--glass-blur-lg));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--glass-radius-lg);
+    box-shadow: var(--glass-shadow-lg);
+  }
+
+  /* --- Glass dark --- */
+  .glass-dark {
+    background: rgba(10, 10, 15, 0.6);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--glass-radius);
+    box-shadow: var(--glass-shadow);
+  }
+
+  /* --- Glass purple --- */
+  .glass-purple {
+    background: rgba(126, 34, 206, 0.12);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid rgba(126, 34, 206, 0.2);
+    border-radius: var(--glass-radius);
+    box-shadow: var(--glass-shadow-purple);
+  }
+
+  /* --- Glass gold --- */
+  .glass-gold {
+    background: rgba(245, 158, 11, 0.1);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    border-radius: var(--glass-radius);
+    box-shadow: var(--glass-shadow-gold);
+  }
+
+  /* --- Glass white (light overlay) --- */
+  .glass-white {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--glass-radius);
+    box-shadow: var(--glass-shadow);
+  }
+
+  /* --- Glass strong --- */
+  .glass-strong {
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(var(--glass-blur-lg));
+    -webkit-backdrop-filter: blur(var(--glass-blur-lg));
+    border: 1px solid var(--glass-border-hover);
+    border-radius: var(--glass-radius);
+    box-shadow: var(--glass-shadow-lg);
+  }
+
+  /* --- Glass interactive (hover effect) --- */
+  .glass-hover {
+    transition:
+      background var(--transition-base),
+      border-color var(--transition-base),
+      box-shadow var(--transition-base),
+      transform var(--transition-base);
+  }
+
+  .glass-hover:hover {
+    background: var(--glass-bg-strong);
+    border-color: var(--glass-border-hover);
+    box-shadow: var(--glass-shadow-lg);
+    transform: translateY(-2px);
+  }
+}
+
+/* ============================================================
+   ANIMATIONS – Keyframes de bază
+   ============================================================ */
+
+/* Fade in */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Fade out */
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* Slide up + fade */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide down + fade */
+@keyframes slideDownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide left + fade */
+@keyframes slideLeftFade {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide right + fade */
+@keyframes slideRightFade {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Scale in */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Scale out */
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+}
+
+/* Pulse glow (purple) */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(126, 34, 206, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(126, 34, 206, 0.5);
+  }
+}
+
+/* Pulse glow (gold) */
+@keyframes pulseGlowGold {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(245, 158, 11, 0.5);
+  }
+}
+
+/* Shimmer – gradient care alunecă */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Rotate (lent) */
+@keyframes rotateSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Float (bounce subtle) */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-8px); }
+}
+
+/* Gradient move – fundal în mișcare */
+@keyframes gradientMove {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ============================================================
+   ANIMATION UTILITY CLASSES
+   ============================================================ */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn var(--transition-base) ease-out both;
+  }
+
+  .animate-fade-out {
+    animation: fadeOut var(--transition-base) ease-in both;
+  }
+
+  .animate-slide-up {
+    animation: slideUpFade 0.5s ease-out both;
+  }
+
+  .animate-slide-down {
+    animation: slideDownFade 0.5s ease-out both;
+  }
+
+  .animate-slide-left {
+    animation: slideLeftFade 0.5s ease-out both;
+  }
+
+  .animate-slide-right {
+    animation: slideRightFade 0.5s ease-out both;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out both;
+  }
+
+  .animate-scale-out {
+    animation: scaleOut 0.3s ease-in both;
+  }
+
+  .animate-pulse-glow {
+    animation: pulseGlow 2.5s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow-gold {
+    animation: pulseGlowGold 2.5s ease-in-out infinite;
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(
+      110deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.06) 50%,
+      transparent 70%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s ease-in-out infinite;
+  }
+
+  .animate-rotate-slow {
+    animation: rotateSlow 20s linear infinite;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradientMove 6s ease infinite;
+  }
+
+  /* Delay utilities */
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+  .delay-700 { animation-delay: 700ms; }
+  .delay-1000 { animation-delay: 1000ms; }
+
+  /* Duration utilities */
+  .duration-fast { animation-duration: 150ms; }
+  .duration-base { animation-duration: 250ms; }
+  .duration-slow { animation-duration: 500ms; }
+  .duration-slower { animation-duration: 800ms; }
+
+  /* Fill mode */
+  .fill-both { animation-fill-mode: both; }
+  .fill-forwards { animation-fill-mode: forwards; }
+  .fill-backwards { animation-fill-mode: backwards; }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in,
+    .animate-fade-out,
+    .animate-slide-up,
+    .animate-slide-down,
+    .animate-slide-left,
+    .animate-slide-right,
+    .animate-scale-in,
+    .animate-scale-out,
+    .animate-pulse-glow,
+    .animate-pulse-glow-gold,
+    .animate-shimmer,
+    .animate-rotate-slow,
+    .animate-float,
+    .animate-gradient {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+}
+
+/* ============================================================
+   ADDITIONAL GLOBAL UTILITIES
+   ============================================================ */
+
+/* Gradient backgrounds */
+.bg-gradient-dark {
+  background: linear-gradient(135deg, #0a0a0f 0%, #12121a 50%, #0f0f18 100%);
+}
+
+.bg-gradient-purple {
+  background: linear-gradient(135deg, #3b0764 0%, #7e22ce 50%, #a855f7 100%);
+}
+
+.bg-gradient-gold {
+  background: linear-gradient(135deg, #451a03 0%, #b45309 50%, #f59e0b 100%);
+}
+
+.bg-gradient-mixed {
+  background: linear-gradient(135deg, #3b0764 0%, #7e22ce 30%, #b45309 70%, #f59e0b 100%);
+}
+
+/* Text gradients */
+.text-gradient-purple {
+  background: linear-gradient(135deg, #a855f7, #7e22ce);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-mixed {
+  background: linear-gradient(135deg, #a855f7, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Noise overlay (subtil) */
+.bg-noise::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-noise > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Glow ring */
+.glow-purple {
+  box-shadow:
+    0 0 15px rgba(126, 34, 206, 0.3),
+    0 0 45px rgba(126, 34, 206, 0.1);
+}
+
+.glow-gold {
+  box-shadow:
+    0 0 15px rgba(245, 158, 11, 0.3),
+    0 0 45px rgba(245, 158, 11, 0.1);
+}

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+  xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+>
+  <!-- ═══════════════════════════════════════════════════════════════
+       SITEMAP — Nexus Dev Studio
+       URL-uri generate automat la build.
+       Domeniu: https://nexusdevstudio.ro
+       ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       PAGINA PRINCIPALĂ (Home)
+       Conține secțiunile: Hero, Servicii, Portofoliu, Proces,
+       Termeni Livrare, FAQ, Contact
+       ═══════════════════════════════════════════════════════════════ -->
+  <url>
+    <loc>https://nexusdevstudio.ro/</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+
+    <!-- Imagini relevante pentru SEO -->
+    <image:image>
+      <image:loc>https://nexusdevstudio.ro/images/og-image.jpg</image:loc>
+      <image:title>Nexus Dev Studio — Dezvoltare Web și Mobilă cu AI</image:title>
+      <image:caption>Freelancer Full-Stack specializat în dezvoltare web și mobilă. Soluții digitale complete cu AI (Nexus Core Neural).</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://nexusdevstudio.ro/images/logo-black-bg.png</image:loc>
+      <image:title>Logo Nexus Dev Studio</image:title>
+      <image:caption>Logo oficial Nexus Dev Studio — dezvoltare web &amp; mobilă</image:caption>
+    </image:image>
+
+    <!-- Video de fundal Hero -->
+    <video:video>
+      <video:thumbnail_loc>https://nexusdevstudio.ro/images/hero-poster.jpg</video:thumbnail_loc>
+      <video:title>Nexus Dev Studio — Prezentare</video:title>
+      <video:description>Videoclip de fundal animat pentru secțiunea Hero a site-ului Nexus Dev Studio.</video:description>
+      <video:content_loc>https://nexusdevstudio.ro/video/hero-background.mp4</video:content_loc>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:requires_subscription>no</video:requires_subscription>
+    </video:video>
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       PAGINI SECȚIUNI (One-page — ancore)
+       Deși sunt ancore într-un SPA, le includem ca referință
+       pentru crawlere. Prioritatea este mai scăzută decât
+       pagina principală.
+       ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- Servicii -->
+  <url>
+    <loc>https://nexusdevstudio.ro/#services</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Portofoliu -->
+  <url>
+    <loc>https://nexusdevstudio.ro/#portfolio</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Proces (Cum lucrăm) -->
+  <url>
+    <loc>https://nexusdevstudio.ro/#process</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- FAQ -->
+  <url>
+    <loc>https://nexusdevstudio.ro/#faq</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Contact -->
+  <url>
+    <loc>https://nexusdevstudio.ro/#contact</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Termeni Livrare -->
+  <url>
+    <loc>https://nexusdevstudio.ro/#delivery</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+</urlset>

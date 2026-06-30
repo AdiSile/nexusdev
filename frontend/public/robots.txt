@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Rute administrative — nu indexa
+Disallow: /admin
+Disallow: /admin/
+
+Sitemap: https://nexusdevstudio.ro/sitemap.xml
