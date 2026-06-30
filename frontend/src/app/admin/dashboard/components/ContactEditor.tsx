@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import type { SiteSettings } from "@/lib/api";
-import InputField from "./InputField";
 
 // ═══════════════════════════════════════════════════════════════
 // CONSTANTE
